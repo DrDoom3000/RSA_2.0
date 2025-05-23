@@ -1,0 +1,1 @@
+This is an upgraded version of the known RSA encryption. It uses a similar method as RSA,but then encrypts the RSA-encrypted string a bit further into unreadable Unicode. A decrypter is currently in work, but you can also try to write your own decrypter.
