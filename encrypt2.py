@@ -2,7 +2,6 @@ import random
 from sympy import mod_inverse, nextprime
 import math
 
-# --- Funktionen zur positionsabhängigen Umwandlung und Unicode-Zuordnung ---
 
 def get_position_mapping(pos, mapping_seed):
     r = random.Random(mapping_seed + pos)
@@ -24,10 +23,9 @@ def decrypt_digit_layer(cipher_unicode, mapping_seed, unicode_table):
         result.append(str(mapping.index(byte_val)))
     return ''.join(result)
 
-# --- Blockaufteilung und Permutationslogik ---
 
 def split_and_shuffle(number_str):
-    num_blocks = len(number_str) // 15  # Neue Blockgröße: 15 Ziffern
+    num_blocks = len(number_str) // 15 
     blocks_15 = [number_str[i*15:(i+1)*15] for i in range(num_blocks)]
     shuffled_blocks = []
     perms = []
@@ -55,14 +53,12 @@ def unshuffle(block, perm_code):
 
     return ''.join([mini_blocks[inverse_perm[i]] for i in range(5)])
 
-# --- Erweiterte Verschlüsselungslogik ---
 
 def encrypt_block(P, A, F, G, H, BE, n):
     X = P * A
     Y = pow(X, BE, n)
     return (Y * pow(F, 2, n) + pow(G, H, n)) % n
 
-# ---------------------- Hauptprogramm ----------------------
 
 input_number = input("Please enter a 75 digit number: ")
 
@@ -72,7 +68,6 @@ if len(input_number) != 75 or not input_number.isdigit():
 
 shuffled_blocks, permutations = split_and_shuffle(input_number)
 
-# Schlüsselerzeugung
 E = 17
 B = 5
 BE = B * E
